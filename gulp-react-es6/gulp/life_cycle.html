@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id = 'box'></div>
+	<script type = 'text/javascript' src = './bower_components/react/react.js'></script>
+	<script type = 'text/javascript' src = './bower_components/react/react-dom.js'></script>
+	<script type = 'text/javascript' src = './bower_components/react/browser.min.js'></script>
+	<script type = 'text/babel'>
+		var Comp = React.createClass({
+			getDefaultProps:function(){
+				console.log('设置默认属性')
+				return {
+					message:[1]
+				}
+			},
+			getInitialState:function(){
+				console.log('设置初始状态')
+				return {
+					message:'这个是初始状态的message',
+					count:0
+				}
+			},
+			componentWillMount:function(){
+				// var self = this;
+				// this.timer = setInterval(function(){
+				// 	self.setState({
+				// 		count:self.state.count+1
+				// 	})
+				// },1000);
+				console.log('组件将要装载')
+				this.setState({
+					message:'这个是装载前设置的message'
+				})
+			},
+			doUpdate:function(){
+				this.setState({
+					count:this.state.count+1
+				})
+			},
+			componentDidMount:function(){
+				console.log('组件已经转载');
+				console.log(this.getDOMNode());
+			},
+			shouldComponentUpdate:function(nextProp,nextState){
+				console.log(nextProp);
+				console.log(nextState);
+				console.log('组件状态应不应该改变');
+				return true
+			},
+			componentWillUpdate:function(){
+				console.log('组件状态将被改变')
+			},
+			componentDidUpdate:function(){
+				console.log('组件状态已经改变')
+			},
+			componentWillUnmount:function(){//组件被卸载时自动触发自动触发。
+				alert('hey,you are trying to kill me !!!');
+			},
+			killme:function(){
+				ReactDOM.unmountComponentAtNode(document.getElementById('box'))//卸载组件方法
+			},
+			render:function(){
+				return (
+					<div>
+						<h1>{this.state.message}</h1>
+						<h2>计数：{this.state.count}</h2>	
+						<button type="button" onClick = {this.killme}>卸载这个组件</button>
+						<button type="button" onClick = {this.doUpdate}>手动更新</button>
+						<Subcom count = {this.state.count}/>
+					</div>
+				)
+			},
+		});
+		var Subcom = React.createClass({
+			componentWillReceiveProps:function(){
+				console.log('将要获取子组件属性');
+			},
+			shouldComponentUpdate:function(nextProp){
+				console.log(nextProp);
+				if(nextProp.count>3) return false;
+				return true;
+			},
+			render:function(){
+				return (
+					<div>
+						<h5>{this.props.count}</h5>
+					</div>
+				)
+			}
+		})
+		ReactDOM.render(
+				<Comp/>,
+				document.getElementById('box'),
+				console.log('渲染完成！！！！')
+			)
+	</script>
+</body>
+</html>

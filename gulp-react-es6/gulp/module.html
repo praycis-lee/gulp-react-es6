@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+// //全局函数
+// 	function fun1(){
+// 		//code
+// 	}
+
+// 	function fun2(){
+// 		//code
+// 	}
+// //封装在一个对象里面,但是缺点是可以在外部任意的修改对象里面的属性
+// 	var obj = {
+// 		fun1:function(){
+// 			//coding
+// 		},
+// 		fun2:function(){
+// 			//coding
+// 		}
+// 	}
+// //通过函数自调用返回一个对象,这个就是基础的JS模块化
+// var fun = (function(){
+// 	function func1(){
+// 		//coding
+// 	}
+// 	function func2(){
+// 		//coding
+// 	}
+// 	return {
+// 		func1:'func1',
+// 		func2:'func2'
+// 	}
+// })();
+// console.log(fun);
+
+var obj = {};
+Object.defineProperty(obj,'a',{
+	value:true
+});
+console.log(obj.a);
+
+
+</script>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单事件对象</title>
+</head>
+<body>
+	<div id = 'box'></div>
+	<script type = 'text/javascript' src = './bower_components/react/react.js'></script>
+	<script type = 'text/javascript' src = './bower_components/react/react-dom.js'></script>
+	<script type = 'text/javascript' src = './bower_components/react/browser.min.js'></script>
+	<script type = 'text/babel'>
+		var Form = React.createClass({
+			getInitialState:function(){
+				return {
+					inputValue:'this is input',
+					selectValue:'this is select',
+					radioValue:'this is radio',
+					checkboxValue:[],
+					textareaValue:'this is textarea'
+				}
+			},
+			handleRadio:function(e){
+				this.setState({
+					radioValue:e.target.value
+				})
+			},
+			handleCheck:function(e){
+				var arr = this.state.checkboxValue.slice();
+				var newVal = e.target.value;
+				if(arr.indexOf(newVal)==-1){
+					arr.push(newVal)
+				}else{
+					arr.splice(arr.indexOf(newVal),1)
+				}
+				this.setState({
+					checkboxValue:arr
+				})
+			},
+			handleSub:function(e){	
+				var formData = {
+					input:this.refs.asdf.value,
+					select:this.refs.select.value,
+					textarea:this.refs.textarea.value,
+					radio:this.state.radioValue,
+					check:this.state.checkboxValue
+				}
+				console.log(formData);
+				return false
+			},
+			render:function(e){
+				return (
+					<form onSubmit = {this.handleSub} action='#'>
+						<input type = 'text' ref = 'asdf'/>
+
+						<select name="" defalutValue = 'A' ref = 'select'>
+							<option value="a">A</option>
+							<option value="b">B</option>
+							<option value="c">C</option>}
+						</select>
+						
+						<Radio handleRadio = {this.handleRadio}/>
+						
+						<Checkboxes handleCheckbox = {this.handleCheck}/>
+
+						<textarea defaultValue = 'sssssss' ref = 'textarea'></textarea>
+
+						<input type = 'submit'/>go
+
+					</form>
+					)
+			}
+		});
+		var Radio = React.createClass({
+			render:function(){
+				return (
+					<span>
+						<input type = 'radio' value = 'A' onChange = {this.props.handleRadio}/>
+						<input type = 'radio' value = 'B' onChange = {this.props.handleRadio}/>
+					</span>
+				)
+			}
+		});
+		var Checkboxes = React.createClass({
+			render:function(){
+				return (
+					<span>
+						<input type = 'checkbox' Checked value = 'A' onChange = {this.props.handleCheckbox}/>
+						<input type="checkbox" name="" value="B" onChange = {this.props.handleCheckbox}/>
+					</span>
+				)
+			}
+		})
+		ReactDOM.render(
+			<Form/>,
+			document.getElementById('box'),
+			console.log('渲染完成！！！！')
+			)
+	</script>
+</body>
+</html>

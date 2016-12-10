@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box" style = 'background:red;width:100px;height:100px;word-break: break-all;'></div>
+</body>
+<script type = 'text/javascript' src = './bower_components/react/react.js'></script>
+<script type = 'text/javascript' src = './bower_components/react/react-dom.js'></script>
+<script type = 'text/javascript' src = './bower_components/react/browser.min.js'></script>
+<script type = 'text/babel'>
+	var First = React.createClass({
+		alert:function(){alert(1)},
+		render:function(){
+			return <h1 onClick = {this.alert}>sss</h1>
+		}
+	})
+	ReactDOM.render(
+			<First/>,
+			document.getElementById('box'),
+			function(){
+				console.log('渲染完成')
+			}
+		)
+</script>
+</html>

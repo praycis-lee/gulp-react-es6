@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id = 'box'></div>
+<script type = 'text/javascript' src = './bower_components/react/react.js'></script>
+<script type = 'text/javascript' src = './bower_components/react/react-dom.js'></script>
+<script type = 'text/javascript' src = './bower_components/react/react-with-addons.js'></script>
+<script type = 'text/javascript' src = './bower_components/react/browser.min.js'></script>
+<script type = 'text/babel'>
+	var Comp = React.createClass({
+		mixins:[React.addons.LinkedStateMixin],
+		getInitialState:function(){
+			return {
+				message:'react很好',
+				isOk:true,
+			}
+		},
+		render:function(){
+			return (
+				<div>
+					<h1>我想说：{this.state.message}</h1>
+					<h2>react好不好用:{this.state.isOk?'好用':'一般般'}</h2>
+					<Subcomp a = {this.linkState('message')} b = {this.linkState('isOk')}/>
+				</div>
+			)
+		}
+	});
+	var Subcomp = React.createClass({
+		render:function(){
+			return (	
+				<div>
+					<h1>来自子组件PROPS</h1>
+					<Subsubcomp {...this.props}/>
+				</div>
+			)
+		}
+	});
+	var Subsubcomp = React.createClass({
+		render:function(){
+			return (
+				<div>
+					<input type="text" valueLink = {this.props.a}/>
+					<input type="checkbox" checkedLink = {this.props.b}/>
+				</div>
+			)
+		}
+	});
+	ReactDOM.render(
+			<Comp/>,
+			document.getElementById('box'),
+			console.log('渲染完成！！！！')
+	)
+</script>
+</body>
+</html>

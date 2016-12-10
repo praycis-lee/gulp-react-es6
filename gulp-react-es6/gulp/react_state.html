@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id = 'box'></div>
+	<script type = 'text/javascript' src = './bower_components/react/react.js'></script>
+	<script type = 'text/javascript' src = './bower_components/react/react-dom.js'></script>
+	<script type = 'text/javascript' src = './bower_components/react/browser.min.js'></script>
+	<script type = 'text/babel'>
+		var Cli = React.createClass({
+			getInitialState:function(){
+					return {
+						count:1,
+					}
+				},
+			handleClick:function(){
+					this.setState({
+						count:this.state.count+1
+					})
+				},
+			render:function(){
+				var styleO = {
+					background:'#ff6700'
+				}
+				return (
+					<div>
+						<h1>点击实例</h1>
+						<button type="" onClick = {this.handleClick}>点我</button>
+						<p style = {styleO}>一共点击了{this.state.count}下</p>
+					</div>
+					)
+			}
+		})
+		var comp =  ReactDOM.render(
+			<Cli/>,
+			document.getElementById('box'),
+			function(){
+				console.log('渲染完成！')
+			}
+		)
+	</script>
+</body>
+</html>

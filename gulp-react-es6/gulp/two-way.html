@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body id = 'app'>
+
+	<script src = './bower_components/react/react.js'></script>
+	<script src = './bower_components/react/react-dom.js'></script>
+	<script src = './bower_components/react/react-with-addons.js'></script>
+	<script src = './bower_components/react/browser.min.js'></script>
+	<script type = 'text/babel'>
+		// var First = React.createClass({
+		// 	getInitialState:function(){
+		// 		return {
+		// 			change:''
+		// 		}
+		// 	},
+		// 	handleC:function(e){
+		// 		this.setState({
+		// 			change:e.target.value
+		// 		})
+		// 	},
+		// 	render:function(){
+		// 		return (
+		// 			<div>
+		// 				<input type="text" name="" value={this.state.change} onChange = {this.handleC}/>
+		// 				<div>
+		// 					{this.state.change}
+		// 				</div>
+		// 			</div>
+		// 		)
+		// 	}
+		// })
+		// ReactDOM.render(
+		// 		<First/>,
+		// 		document.getElementById('app')
+		// 	)
+		var Fi = React.createClass({
+			mixins:[React.addons.LinkedStateMixin],
+			getInitialState:function(){
+				return {
+					mes:'hey,write here!!!'
+				}
+			},
+			render:function(){
+				return (
+					<div>
+						<input type = 'text' valueLink = {this.linkState('mes')}/>
+						<span>{this.state.mes}</span>
+					</div>
+
+				)
+			},
+		});
+		ReactDOM.render(
+			<Fi/>,
+			document.getElementById('app')
+	
+		)
+	</script>
+</body>
+</html>

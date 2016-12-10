@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React组件的嵌套</title>
+</head>
+<body>
+<div id="box">
+
+</div>
+
+
+<script type = 'text/javascript' src = './bower_components/react/react.js'></script>
+<script type = 'text/javascript' src = './bower_components/react/react-dom.js'></script>
+<script type = 'text/javascript' src = './bower_components/react/browser.min.js'></script>
+<script type = 'text/babel'>
+   var MessageBox = React.createClass({
+    render:function(){
+        var arr = [];
+        for(var i = 0 ;i<10;i++){
+            arr.push(<Submessage key = {i}/>)
+        }
+        return (
+            <div>
+                <h1>你好世界</h1>
+                {arr}
+            </div>
+            )
+    }
+   });
+
+   var Submessage = React.createClass({
+        render:function(){
+            return (
+                <div>
+                    <h3>写代码很有意思</h3>
+                    <Footer />
+                </div>
+            )
+        }
+   });
+
+   var Footer = React.createClass({
+        render:function(){
+            return (
+                <small>因为我们再用代码创造</small>
+            )
+        }
+   });
+    ReactDOM.render(
+        <MessageBox />,
+        document.getElementById('box'),
+        function(){
+            console.log('渲染完成！！！')
+        }
+    )
+</script>
+</body>
+</html>
